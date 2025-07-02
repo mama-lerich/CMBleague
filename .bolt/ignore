@@ -1,32 +1,34 @@
-# 🔒 Dependency locks (not needed for Bolt AI context)
+# 🔒 Dependency locks and metadata
 package-lock.json
+*.lock
+*.md
 
-# 🧪 Build outputs or environment configs
+# 🧪 Build outputs, cache, and environment
 node_modules/
 dist/
 .git/
-*.lock
-*.md
 *.env
 
-# ⚙️ Tooling configs (not logic-critical)
+# ⚙️ Tooling and config files not needed for Bolt context
 vite.config.ts
 postcss.config.js
 tailwind.config.js
-tsconfig*.json
+tsconfig.json
+tsconfig.node.json
+tsconfig.app.json
 .eslint*
 vite-env.d.ts
 
-# 🚫 Heavy or non-essential admin components (optional)
+# 🧪 Test files and test directories (optional)
+*.test.tsx
+*.spec.tsx
+__tests__/
+__mocks__/
+
+# 🚫 Large or rarely used admin modules (optional, editable)
 src/components/Admin/SimpleImportExport.tsx
 src/components/Admin/MatchScheduler.tsx
 src/components/Admin/GalleryManager.tsx
 src/components/Admin/SponsorManager.tsx
 src/components/Admin/BulkOperations.tsx
 src/components/Admin/ArchiveManager.tsx
-
-# 🧪 Optional: ignore test files or mock data
-*.test.tsx
-*.spec.tsx
-__mocks__/
-__tests__/
