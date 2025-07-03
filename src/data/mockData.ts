@@ -294,74 +294,7 @@ const matches: Match[] = [
   }
 ];
 
-// Mock Sponsors based on the image
-const sponsors: Sponsor[] = [
-  {
-    id: '1',
-    name: 'Heineken',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/Heineken-Logo.png',
-    website: 'https://heineken.com',
-    tier: 'official'
-  },
-  {
-    id: '2',
-    name: 'PlayStation',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/PlayStation-Logo.png',
-    website: 'https://playstation.com',
-    tier: 'official'
-  },
-  {
-    id: '3',
-    name: 'Lay\'s',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/Lays-Logo.png',
-    website: 'https://lays.com',
-    tier: 'official'
-  },
-  {
-    id: '4',
-    name: 'FedEx',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/FedEx-Logo.png',
-    website: 'https://fedex.com',
-    tier: 'official'
-  },
-  {
-    id: '5',
-    name: 'Mastercard',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/Mastercard-Logo.png',
-    website: 'https://mastercard.com',
-    tier: 'official'
-  },
-  {
-    id: '6',
-    name: 'Crypto.com',
-    logo: 'https://logos-world.net/wp-content/uploads/2021/03/Crypto-com-Logo.png',
-    website: 'https://crypto.com',
-    tier: 'official'
-  },
-  {
-    id: '7',
-    name: 'Bet365',
-    logo: 'https://logos-world.net/wp-content/uploads/2021/03/Bet365-Logo.png',
-    website: 'https://bet365.com',
-    tier: 'official'
-  },
-  {
-    id: '8',
-    name: 'Just Eat',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/11/Just-Eat-Logo.png',
-    website: 'https://justeat.com',
-    tier: 'official'
-  },
-  {
-    id: '9',
-    name: 'Qatar Airways',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Logo.png',
-    website: 'https://qatarairways.com',
-    tier: 'official'
-  }
-];
-
-// Mock Tournament with enhanced data
+// Mock Tournament with enhanced data (without sponsors - they are now global)
 export const mockTournament: Tournament = {
   id: '1',
   name: 'Coupe Mario Brutus 2024',
@@ -377,7 +310,6 @@ export const mockTournament: Tournament = {
   description: 'La plus grande compétition de football amateur de la région',
   location: 'Petion-Ville, Haiti',
   prize: 'Trophée Mario Brutus + 500,000 HTG',
-  sponsors,
   rules: [
     'Matchs de 90 minutes (2 x 45 min)',
     'Maximum 3 remplacements par équipe',
@@ -475,7 +407,6 @@ export const mockTournaments: Tournament[] = [
     playersPerTeam: 11,
     description: 'Édition 2023 de la Coupe Mario Brutus',
     location: 'Petion-Ville, Haiti',
-    sponsors,
     standings: [
       {
         teamId: 'old1',
@@ -524,7 +455,6 @@ export const mockTournaments: Tournament[] = [
     playersPerTeam: 11,
     description: 'Édition 2022 de la Coupe Mario Brutus',
     location: 'Petion-Ville, Haiti',
-    sponsors,
     standings: [
       {
         teamId: 'old2',

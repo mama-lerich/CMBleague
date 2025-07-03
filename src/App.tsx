@@ -67,8 +67,8 @@ const AppContent: React.FC = () => {
         {renderCurrentView()}
       </main>
 
-      {/* Sponsors Section */}
-      <SponsorsSection sponsors={currentTournament?.sponsors} />
+      {/* Sponsors Section - Only on Dashboard */}
+      {currentView === 'dashboard' && <SponsorsSection />}
 
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200">

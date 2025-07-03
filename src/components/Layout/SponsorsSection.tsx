@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import { Star, ExternalLink, Plus, Edit, Trash2 } from 'lucide-react';
+import { Star, ExternalLink, Plus } from 'lucide-react';
 import { Sponsor } from '../../types';
 import { useApp } from '../../contexts/AppContext';
 import { SponsorManager } from '../Admin/SponsorManager';
 
-interface SponsorsSectionProps {
-  sponsors?: Sponsor[];
-}
-
-export const SponsorsSection: React.FC<SponsorsSectionProps> = ({ sponsors = [] }) => {
-  const { userRole } = useApp();
+export const SponsorsSection: React.FC = () => {
+  const { userRole, globalSponsors } = useApp();
   const [showSponsorManager, setShowSponsorManager] = useState(false);
 
-  if (!sponsors || sponsors.length === 0) {
+  if (!globalSponsors || globalSponsors.length === 0) {
     // Show add button for admin even when no sponsors
     if (userRole === 'admin') {
       return (
@@ -80,7 +76,7 @@ export const SponsorsSection: React.FC<SponsorsSectionProps> = ({ sponsors = [] 
         {/* Sponsors Grid - Centered */}
         <div className="flex justify-center">
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9 gap-4 sm:gap-6 items-center justify-items-center max-w-6xl">
-            {sponsors.map((sponsor) => (
+            {globalSponsors.map((sponsor) => (
               <div
                 key={sponsor.id}
                 className="group relative bg-white rounded-xl p-3 sm:p-4 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full max-w-[120px]"
