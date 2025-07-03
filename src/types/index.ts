@@ -156,3 +156,49 @@ export interface Award {
     year: number;
   }[];
 }
+
+// Nouvelles interfaces pour le Hall of Fame
+export interface HallOfFameRecord {
+  id: string;
+  category: HallOfFameCategory;
+  title: string;
+  description: string;
+  year: number;
+  tournamentId: string;
+  tournamentName: string;
+  recipient: {
+    type: 'player' | 'team' | 'coach' | 'match' | 'goal';
+    id: string;
+    name: string;
+    teamName?: string;
+    photo?: string;
+    details?: any;
+  };
+  stats?: {
+    value: number;
+    unit: string;
+    context?: string;
+  };
+  achievement?: string;
+}
+
+export type HallOfFameCategory = 
+  | 'best_team_ever'
+  | 'top_scorer'
+  | 'top_assistant'
+  | 'best_goalkeeper'
+  | 'best_young_player'
+  | 'best_defender'
+  | 'best_coach'
+  | 'fair_play_team'
+  | 'goal_of_year'
+  | 'legendary_match'
+  | 'most_titled_club'
+  | 'most_consistent_player'
+  | 'coach_revelation'
+  | 'exceptional_performance'
+  | 'best_stadium_atmosphere'
+  | 'longest_winning_streak'
+  | 'fastest_goal'
+  | 'most_saves_match'
+  | 'comeback_of_year';
