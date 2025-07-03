@@ -74,6 +74,11 @@ export interface Match {
   events?: MatchEvent[];
   liveMinute?: number;
   period?: 'first_half' | 'half_time' | 'second_half' | 'full_time' | 'extra_first' | 'extra_break' | 'extra_second' | 'penalty_shootout' | 'finished';
+  leg?: 'first' | 'second'; // Pour les matchs aller-retour
+  aggregateScore?: {
+    home: number;
+    away: number;
+  };
 }
 
 export interface MatchEvent {
@@ -84,6 +89,31 @@ export interface MatchEvent {
   playerName: string;
   teamId: string;
   description?: string;
+}
+
+export type TournamentFormat = 'league' | 'world_cup' | 'champions_league';
+
+export interface TournamentFormatConfig {
+  id: TournamentFormat;
+  name: string;
+  description: string;
+  icon: string;
+  phases: TournamentPhase[];
+  features: string[];
+  minTeams: number;
+  maxTeams: number;
+  recommendedTeams: number[];
+}
+
+export interface TournamentPhase {
+  id: string;
+  name: string;
+  type: 'group_stage' | 'knockout' | 'league';
+  format: 'round_robin' | 'single_elimination' | 'two_legged' | 'home_away';
+  teamsAdvancing?: number; // Nombre d'équipes qui passent au tour suivant
+  groupsCount?: number;
+  teamsPerGroup?: number;
+  homeAndAway?: boolean; // Pour les matchs aller-retour
 }
 
 export interface Tournament {
@@ -104,6 +134,10 @@ export interface Tournament {
   sponsors?: Sponsor[];
   rules?: string[];
   standings?: TeamStanding[];
+  format: TournamentFormat;
+  formatConfig?: TournamentFormatConfig;
+  currentPhase?: string;
+  phases?: TournamentPhase[];
 }
 
 export interface TeamStanding {
