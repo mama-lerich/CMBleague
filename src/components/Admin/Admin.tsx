@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Plus, Users, Calendar, Trophy, Edit, Save, X, Check, AlertCircle, Shuffle, Target, Camera, Archive, Database, Play, Clock } from 'lucide-react';
+import { Settings, Plus, Users, Calendar, Trophy, Edit, Save, X, Check, AlertCircle, Shuffle, Target, Camera, Archive, Database, Play, Clock, Zap } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { Team, Player, Match, Tournament } from '../../types';
 import { AdminDashboard } from './AdminDashboard';
@@ -12,10 +12,11 @@ import { GalleryManager } from './GalleryManager';
 import { ArchiveManager } from './ArchiveManager';
 import { SimpleImportExport } from './SimpleImportExport';
 import { MatchManager } from './MatchManager';
+import { IntelligentMatchGenerator } from './IntelligentMatchGenerator';
 
 export const Admin: React.FC = () => {
   const { currentTournament, userRole, setCurrentTournament, tournaments, setTournaments } = useApp();
-  const [activeSection, setActiveSection] = useState<'dashboard' | 'create' | 'tournaments' | 'teams' | 'matches' | 'players' | 'groups' | 'gallery' | 'archives' | 'import-export' | 'live-matches'>('create');
+  const [activeSection, setActiveSection] = useState<'dashboard' | 'create' | 'tournaments' | 'teams' | 'matches' | 'players' | 'groups' | 'gallery' | 'archives' | 'import-export' | 'live-matches' | 'intelligent-generator'>('create');
   const [showTournamentCreator, setShowTournamentCreator] = useState(false);
   const [showTeamManager, setShowTeamManager] = useState(false);
   const [showMatchScheduler, setShowMatchScheduler] = useState(false);
@@ -24,6 +25,7 @@ export const Admin: React.FC = () => {
   const [showArchiveManager, setShowArchiveManager] = useState(false);
   const [showImportExportManager, setShowImportExportManager] = useState(false);
   const [showMatchManager, setShowMatchManager] = useState(false);
+  const [showIntelligentGenerator, setShowIntelligentGenerator] = useState(false);
   const [editingTournament, setEditingTournament] = useState<Tournament | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -189,12 +191,21 @@ export const Admin: React.FC = () => {
           </button>
 
           <button
+            onClick={() => setShowIntelligentGenerator(true)}
+            className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-8 rounded-xl hover:shadow-xl transition-all duration-200 text-left group"
+          >
+            <Zap className="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" />
+            <div className="font-bold text-xl mb-2">Générateur Intelligent</div>
+            <div className="text-sm opacity-90">Génération automatique de matchs</div>
+          </button>
+
+          <button
             onClick={() => setShowMatchScheduler(true)}
             className="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 rounded-xl hover:shadow-xl transition-all duration-200 text-left group"
           >
             <Calendar className="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" />
             <div className="font-bold text-xl mb-2">Planifier Matchs</div>
-            <div className="text-sm opacity-90">Créer calendrier complet</div>
+            <div className="text-sm opacity-90">Créer calendrier manuel</div>
           </button>
 
           <button
@@ -204,15 +215,6 @@ export const Admin: React.FC = () => {
             <Users className="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" />
             <div className="font-bold text-xl mb-2">Gérer Joueurs</div>
             <div className="text-sm opacity-90">Ajouter et modifier joueurs</div>
-          </button>
-
-          <button
-            onClick={() => setActiveSection('dashboard')}
-            className="bg-gradient-to-br from-gray-500 to-gray-600 text-white p-8 rounded-xl hover:shadow-xl transition-all duration-200 text-left group"
-          >
-            <Settings className="h-12 w-12 mb-4 group-hover:scale-110 transition-transform" />
-            <div className="font-bold text-xl mb-2">Tableau de Bord</div>
-            <div className="text-sm opacity-90">Analyses et contrôles avancés</div>
           </button>
         </div>
       </div>
@@ -316,6 +318,17 @@ export const Admin: React.FC = () => {
                 <span className="text-blue-600">→</span>
               </button>
             )}
+
+            <button
+              onClick={() => setShowIntelligentGenerator(true)}
+              className="w-full flex items-center justify-between p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+            >
+              <div className="flex items-center space-x-3">
+                <Zap className="h-5 w-5 text-indigo-600" />
+                <span className="font-medium text-indigo-900">Générateur intelligent de matchs</span>
+              </div>
+              <span className="text-indigo-600">→</span>
+            </button>
 
             <button
               onClick={() => setShowImportExportManager(true)}
@@ -424,6 +437,12 @@ export const Admin: React.FC = () => {
                 className="bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
               >
                 Gérer Équipes
+              </button>
+              <button
+                onClick={() => setShowIntelligentGenerator(true)}
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+              >
+                Générateur Intelligent
               </button>
               <button
                 onClick={() => setShowMatchScheduler(true)}
@@ -654,6 +673,10 @@ export const Admin: React.FC = () => {
 
       {showMatchManager && (
         <MatchManager onClose={() => setShowMatchManager(false)} />
+      )}
+
+      {showIntelligentGenerator && (
+        <IntelligentMatchGenerator onClose={() => setShowIntelligentGenerator(false)} />
       )}
     </div>
   );
